@@ -1,7 +1,7 @@
 import random
 import time
 
-class NumGamePlay:
+class NumGame:
     round = 0
     score = 0
     play = True
@@ -23,7 +23,7 @@ class NumGamePlay:
     # to checkGuess, loops until True is returned from checkGuess
     def guess(s):
         while s.guess_res != ans:
-            s.guess_res = input('What is your guess? ')
+            s.guess_res = input('\nWhat is your guess? ')
             # if float(s.guess_res):
             #     print(f'Guesses must be whole numbers only, your guess was {s.guess_res}')
             # elif int(s.guess_res):
@@ -33,19 +33,21 @@ class NumGamePlay:
             # else:
             #     print(f'Guesses must be a number, your guess was {s.guess_res}')
             s.round = s.round + 1
-            print(f"Your current score is {s.score}/{s.round} or {'%.2f'%((s.score/s.round)*100)}%")
+            print(f"\nYour current score is {s.score}/{s.round} or {'%.2f'%((s.score/s.round)*100)}%")
 
     # Receives input from the user to determine max guess range
     def guessRange(user_val):
         global guess_range_res
-        guess_range_res = int(input('Please enter a number to guess between 1 and your number: '))
+        guess_range_res = int(input('\nPlease enter a number to guess between 1 and your number: '))
         global ans
         ans = random.randrange(1, guess_range_res)
 
-    # used to start the game and loop through for as long as the user 
+    # Used to start the game and loop through for as long as the user 
     # wants to play, when the user is done, it will print a final score
     def runGame(s):
         while s.play:
+            print("Setting up game! :) \n")
+            time.sleep(1)
             s.guessRange()
             s.guess()
             run_game = input('Would you like to play again? (y/n) ').lower()
@@ -66,6 +68,9 @@ class RockPSGame:
     play = True
     options = ["rock", "paper", "scissors"]
     
+    # Determines the winner for RPS by accepting an input from compChoice
+    # and userChoice then uses a str comparison and returns a
+    # a number to pass to score()
     def battle(s, comp, user):
         print(f"You chose {user}, computer chose {comp}")
         if user == comp:
@@ -92,8 +97,9 @@ class RockPSGame:
             else:
                 print(f"{comp} beats {user}! You lose!\n")
                 return -1
-        
-        
+    
+    # Evaluates the number passed from battle() to determine who gets a 
+    # point
     def scoring(s, sval):
         if sval == 1:
             s.uscore = s.uscore + 1
@@ -102,13 +108,16 @@ class RockPSGame:
         else:
             s.ties = s.ties + 1
     
+    # Receives a string input and returns the value to pass to battle()
     def userChoice(s):
         global user_choice
         print("Are you ready?\n")
         time.sleep(1)
         user_choice = input('Make your choice: Rock, Paper, or Scissors: \n').lower()
         return user_choice
-        
+    
+    # Uses a random choice gen on the options array and returns the 
+    # value to pass to battle()
     def compChoice(s):
         print("Computer is preparing to make a move...\n")
         time.sleep(1)
@@ -116,15 +125,19 @@ class RockPSGame:
         comp_choice = random.choice(s.options)
         return comp_choice
     
+    # Used to start the game and loop through for as long as the user
+    # wants to play, when the user is done, it will print a final score
     def runGame(s):
         while s.play:
+            print("Setting up game! :) \n")
+            time.sleep(1)
             s.scoring(s.battle(s.compChoice(), s.userChoice()))
             s.round = s.round + 1
             print(f"Current round is: {s.round}, scores are: \nUser: {s.uscore}, Computer: {s.cscore}, Ties:{s.ties}")
             run_game = input('\nWould you like to play again? (y/n) ').lower()
             if run_game != 'y': 
                 break
-
+            
         print(
             f"\nFinal score was: User: {s.uscore} of {s.round}, Computer's score {s.cscore} of {s.round}, Ties:{s.ties}")
 
@@ -139,14 +152,24 @@ class RockPSGame:
 #         print()
 
 
-games = [NumGamePlay(), RockPSGame()]
+games = [NumGame(), RockPSGame()]
 
-playing = games[int(input('''What game would you like to play?
----- Use the corresponding number ----
+# Accepts the users input to determine which game to initialize for game play
+while True: 
+    playing = games[int(input('''What game would you like to play?
 
-Number Guess - 1
-Rock, Paper, Scissors - 2
-Word Guess Game - 3
-''')) - 1]
+    ---- Use the corresponding number ----
 
-playing.runGame()
+    Number Guess - 1
+    Rock, Paper, Scissors - 2
+    Word Guess Game - 3
+    
+Your response here: ''')) - 1]
+
+    playing.runGame()
+    
+    run_game = input('\nWould you like to play another game? (y/n) ').lower()
+    if run_game != 'y':
+        break
+
+print('\n Thank you for playing!')
