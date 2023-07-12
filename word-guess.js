@@ -1,25 +1,58 @@
 wordWeb = {
-  words: {
+  groups: {
     animals: {
-      dog: {},
-      bird: {},
-      fish: {},
-      goldfish: {},
-      hamster: {},
-      rabbit: {},
-      cow: {},
-      sheep: {},
-      pig: {},
-      horse: {},
-      donkey: {},
-      monkey: {},
-      gorilla: {},
-      giraffe: {},
-      tiger: {},
-      lion: {},
-      snake: {},
-      penguin: {},
-      elephant: {},
+      vertebrates: {
+        carnivores: {
+          mammals: {
+            tiger: {},
+            lion: {},
+          },
+          birds: {
+            penguin: {},
+          },
+          reptiles: {
+            snake: {},
+          },
+          amphibians: {},
+          fish: {
+            agnatha: {},
+            chondrichthyes: {},
+            osteichthyes: {
+              goldfish: {},
+            },
+          },
+        },
+        omnivores: {
+          mammals: {
+            dog: {},
+            pig: {},
+            hamster: {},
+            monkey: {},
+            gorilla: {},
+          },
+          reptiles: {},
+          amphibians: {},
+        },
+        herbivores: {
+          mammals: {
+            donkey: {},
+            cow: {},
+            rabbit: {},
+            sheep: {},
+            horse: {},
+            giraffe: {},
+            elephant: {},
+          },
+          birds: {},
+          reptiles: {},
+          amphibians: {},
+        },
+      },
+      invertebrates: {
+        carnivores: {},
+        omnivores: {},
+        herbivores: {},
+      },
     },
     foods: {
       salad: {},
@@ -112,4 +145,4 @@ wordWeb = {
   },
 };
 
-// there are words, then attributescat
+// there are words, then attributes then cates
